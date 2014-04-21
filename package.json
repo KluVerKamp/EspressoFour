@@ -1,0 +1,30 @@
+{
+  "name": "Espresso",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "less-middleware": "latest",
+    "mysql": "latest",
+    "nodemon": "*",
+    "sequelize": "latest",
+    "hogan-express" : "latest",
+    "connect-flash" : "latest",
+    "passport" : "latest",
+    "passport-local" : "latest",
+    "bcrypt-nodejs" : "latest",
+    "socket.io" : "latest",
+    "lodash" : "latest",
+    "static-favicon" : "latest",
+    "morgan" : "latest",
+    "body-parser" : "latest",
+    "cookie-parser" : "latest",
+    "method-override" : "latest",
+    "connect-json" : "latest",
+    "express-session" : "latest",
+    "less-middleware": "~0.1.x"
+  }
+}
