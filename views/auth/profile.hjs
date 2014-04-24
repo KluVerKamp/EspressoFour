@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<div class="page-header text-center">
+	<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+	<a href="/auth/logout" class="btn btn-default btn-sm">Logout</a>
+</div>
+
+<div class="row">
+	<!-- LOCAL INFORMATION -->
+	<div class="col-sm-6">
+		<div class="well">
+			<h3><span class="fa fa-user"></span> Local</h3>
+			<p>
+				<strong>id</strong>: {{ user.id }}<br>
+				<strong>email</strong>: {{ user.email }}<br>
+				<strong>password</strong>: {{ user.password }}
+			</p>
+		</div>
+	</div>
+</div>

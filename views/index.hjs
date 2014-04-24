@@ -1,0 +1,15 @@
+<h1>{{ title }}</h1>
+<hr>
+<p>Welcome to {{ title }} {{message}}</p>
+
+<br/>
+<a href="#" class="btn btn-primary btn-mini" >New Author</a>
+<br/><br/>
+
+{{#authors.length}}
+	<ul>
+		{{#authors}}
+		<li><a href="#">{{name}}</a></li>
+		{{/authors}}
+	</ul>
+{{/authors.length}}
