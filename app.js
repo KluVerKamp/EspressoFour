@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -64,7 +63,7 @@ app.get("/",require('./routes').default);
 
 require('./routes/login')(app,passport);
 require('./routes/session')(app);
-require('./routes/sequelize')(app);
+//require('./routes/sequelize')(app);
 
 
 app.get("/res",function(req,res){
