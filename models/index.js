@@ -1,4 +1,4 @@
-// Sequelize models loader. Will load all the models inside the /models folder.
+// Sequelize models loader. Loads all the models inside the /models folder.
 
 var fs        = require('fs')
   , path      = require('path')
