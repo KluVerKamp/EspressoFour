@@ -13,3 +13,11 @@
 		{{/authors}}
 	</ul>
 {{/authors.length}}
+
+{{#yield-js}}
+	console.log("peep peep");
+{{/yield-js}}
+
+{{#yield-css}}
+	*{}
+{{/yield-css}}
