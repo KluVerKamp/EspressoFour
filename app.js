@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -63,7 +64,7 @@ app.get("/",require('./routes').default);
 
 require('./routes/login')(app,passport);
 require('./routes/session')(app);
-//require('./routes/sequelize')(app);
+require('./routes/sequelize')(app);
 
 
 app.get("/res",function(req,res){
@@ -183,6 +184,9 @@ function getAllMethods(object) {
 	return Object.getOwnPropertyNames(object);
 }
 
+app.get("/socket",function(req,res){
+	res.render("chat/chat");
+});
 
 // catch all the 404 uris
 app.use(function(req,res){
@@ -197,6 +201,9 @@ app.use(function(req,res){
 var server = app.listen(app.get('port'));
 var io = require('socket.io').listen(server);
 io.set('loglevel',10) // set log level to get all debug messages
-io.on('connection',function(socket){
-  socket.emit('init',{msg:"test"})
-})
+
+io.sockets.on('connection', function (socket) {
+	socket.on('click', function (socket) {
+		io.sockets.emit('good', { username:socket.username,message:socket.message });
+	});
+});
