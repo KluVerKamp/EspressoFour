@@ -1,6 +1,6 @@
 $(window).load(function() {
 	
-	var socket = io.connect('http://the-dell-pc:3000');
+	var socket = io.connect('http://your-server-ip:3000');
 
 	socket.on('good', function (data) {
 		console.log(data);
