@@ -1,0 +1,5 @@
+<div id="messages"></div>
+
+<input type="text" id="username" />
+<input type="text" id="message" />
+<input type="button" id="myButton" value="Send" />
