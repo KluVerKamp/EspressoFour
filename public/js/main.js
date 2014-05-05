@@ -1,6 +1,6 @@
 $(window).load(function() {
 	
-	var socket = io.connect('http://your-server-ip:3000');
+	var socket = io.connect(myIP);
 
 	socket.on('good', function (data) {
 		console.log(data);
@@ -21,4 +21,3 @@ $(window).load(function() {
 		$("#message").val("");
 	});
 });
-
