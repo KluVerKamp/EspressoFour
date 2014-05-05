@@ -1,5 +1,30 @@
+<style type="text/css">
+	#controls{
+		width: 71%;
+		bottom: 100px;
+		position: absolute;
+	}
+	#username{
+		width:15%;
+	}
+	#message{
+		width: 79%;
+	}
+	#messages{
+		border: 1px solid #eee;
+		margin: 0 0 15px 0;
+		height: 70vh;
+		overflow: auto;
+		padding: 20px;
+		background: white;
+	}
+</style>
+<script type="text/javascript">
+	myIP="{{myIP}}";
+</script>
 <div id="messages"></div>
-
-<input type="text" id="username" />
-<input type="text" id="message" />
-<input type="button" id="myButton" value="Send" />
+<div id="controls">
+	<input type="text" id="username" placeholder="Username"/>
+	<input type="text" id="message" placeholder="Message"/>
+	<input type="button" id="myButton" value="Send" />
+</div>
