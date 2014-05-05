@@ -63,8 +63,9 @@ app.get("/",require('./routes').default);
 // require('./routes/mongo')(app);
 
 require('./routes/login')(app,passport);
-require('./routes/session')(app);
 require('./routes/sequelize')(app);
+require('./routes/session')(app);
+require('./routes/socket')(app);
 
 
 app.get("/res",function(req,res){
@@ -183,10 +184,6 @@ app.get("/stream",function(req,res){
 function getAllMethods(object) {
 	return Object.getOwnPropertyNames(object);
 }
-
-app.get("/socket",function(req,res){
-	res.render("chat/chat");
-});
 
 // catch all the 404 uris
 app.use(function(req,res){
