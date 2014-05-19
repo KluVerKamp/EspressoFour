@@ -8,7 +8,7 @@ $(window).load(function() {
 	});
 
 	$("#message").keypress(function (e) {
-  		if (e.which == 13) {
+  		if (e.which == 13 && $("#message").val()!="") {
     		$("#myButton").click();
   		}
 	});
@@ -18,6 +18,9 @@ $(window).load(function() {
 			username: $("#username").val(),
 			message: $("#message").val()
 		});
+
 		$("#message").val("");
+
+		$("#messages").scrollTop($("#messages")[0].scrollHeight);
 	});
 });
