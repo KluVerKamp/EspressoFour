@@ -1,15 +1,15 @@
 {
-  "name": "Espresso",
+  "name": "EspressoFour",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "SET DEBUG=socket.io* node EspressoFour &&  nodemon app.js"
   },
   "dependencies": {
     "express": "latest",
     "less-middleware": "latest",
     "mysql": "latest",
-    "nodemon": "*",
+    "nodemon": "latest",
     "sequelize": "latest",
     "hogan-express" : "latest",
     "connect-flash" : "latest",
@@ -18,7 +18,7 @@
     "bcrypt-nodejs" : "latest",
     "socket.io" : "latest",
     "lodash" : "latest",
-    "static-favicon" : "latest",
+    "serve-favicon":"latest",
     "morgan" : "latest",
     "body-parser" : "latest",
     "cookie-parser" : "latest",

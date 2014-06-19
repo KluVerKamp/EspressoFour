@@ -2,12 +2,14 @@
 /**
  * Module dependencies.
  */
-var flash     = require('connect-flash');
-var passport = require('passport');
-var express = require('express');
-var db     = require("./models");
-var http  = require('http');
-var path = require('path');
+var flash       = require('connect-flash');
+var passport   = require('passport');
+var express   = require('express');
+var db       = require("./models");
+var https   = require("https");
+var http   = require('http');
+var path  = require('path');
+var fs   = require("fs");
 var app = express();
 
 // all environments
@@ -21,7 +23,7 @@ app.engine ('hjs', require('hogan-express') )
 app.set('layout', 'layout/default');
 app.set('partials', {header: ""});
 
-app.use(require("static-favicon")());
+app.use(require("serve-favicon")("public/favicon.ico"));
 app.use(require("method-override")());
 app.use(require("morgan")('dev')); //logger
 app.use(require("body-parser")());
@@ -195,10 +197,30 @@ app.use(function(req,res){
 // });
 
 
-var server = app.listen(app.get('port'));
-var io = require('socket.io').listen(server);
-io.set('loglevel',10) // set log level to get all debug messages
+var key_file   = "certs/file.pem";
+var cert_file  = "certs/file.crt";
+var passphrase = "";
+var config	   = {
+	key: fs.readFileSync(key_file),
+	cert: fs.readFileSync(cert_file)
+};
 
+if(passphrase) {
+  config.passphrase = passphrase;
+}
+
+var server = https.createServer(config,app);
+server.listen(app.get('port'))
+
+//redirect plain http connections to https
+http.createServer(function(req,res){
+	res.writeHead(302, {
+		'Location': "https://" + req.headers.host + ":" + app.get('port') + req.url
+	});
+	res.end();
+}).listen(80);
+
+var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 	socket.on('click', function (socket) {
 		io.sockets.emit('good', { username:socket.username,message:socket.message });
