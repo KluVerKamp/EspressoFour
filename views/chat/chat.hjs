@@ -24,7 +24,7 @@
 </script>
 <div id="messages"></div>
 <div id="controls">
-	<input type="text" id="username" placeholder="Username"/>
+	<input type="text" id="username" placeholder="Username" autofocus/>
 	<input type="text" id="message" placeholder="Message"/>
 	<input type="button" id="myButton" value="Send" />
 </div>
