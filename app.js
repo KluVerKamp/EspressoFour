@@ -225,4 +225,11 @@ io.sockets.on('connection', function (socket) {
 	socket.on('click', function (socket) {
 		io.sockets.emit('good', { username:socket.username,message:socket.message });
 	});
+	socket.on('startTyping', function (socket) {
+		io.sockets.emit('isTyping', { username:socket.username });
+	});
+
+	socket.on('endTyping', function (socket) {
+		io.sockets.emit('doneTyping', { username:socket.username });
+	});
 });

@@ -22,6 +22,7 @@
 <script type="text/javascript">
 	myIP="{{myIP}}";
 </script>
+<div id="whoistyping" class="text-muted"></div>
 <div id="messages"></div>
 <div id="controls">
 	<input type="text" id="username" placeholder="Username" autofocus/>
