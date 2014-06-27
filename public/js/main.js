@@ -32,7 +32,6 @@ $(window).load(function() {
 	$(Typers).on('del add', function() {
 		if(Typers.names.length){
 			message+= Typers.names[0]
-			console.log(Typers.names.length);
 			if(Typers.names.length == 1){
 				message += " is typing..."
 			}
@@ -72,7 +71,22 @@ $(window).load(function() {
 	});
 
 	$("#myButton").click(function(event) {
-		
+		if(!$("#username").prop("disabled")){
+			$.ajax({
+				url: '/socket/username/'+$("#username").val(),
+			})
+			.done(function() {
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("AJAX error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			
+		}
+
 		if($("#username").val() && $("#message").val()){
 			socket.emit('click', {
 				username: $("#username").val(),
