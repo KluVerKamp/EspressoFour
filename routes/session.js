@@ -5,7 +5,7 @@ module.exports = function(app){
 
 	app.get("/cookie",function(req,res){
 		res.send(req.cookies.name);
-	//res.clearCookie("name");
+		//res.clearCookie("name");
 	});
 
 	app.get("/session/:name",function(req,res,next){

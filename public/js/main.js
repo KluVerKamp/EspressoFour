@@ -1,13 +1,12 @@
-var focus = 1;
 var audio = new Audio('/audio/hangout_dingtone.m4a')
+var socket = io.connect(myIP)
+var Typers = {names:[]}
 	audio.volume = 0.3
-
-var socket = io.connect(myIP);
-var Typers = {names:[]};
+var clicking = 0
 var message=""
+var focus = 1
 
 $(window).load(function() {
-
 	Typers.push = function (data){
 		var me = this.names
 		if( $.inArray(data,me) && data != $("#username").val()){
@@ -46,14 +45,13 @@ $(window).load(function() {
 		message=""
 	});
 
-	var clicking = 0;
 	$("#message").keydown(function(event) {
 		if(clicking==0){
 			socket.emit("startTyping",{
 				username: $("#username").val()
 			})
 			clicking=1;
-			setInterval(function(){clicking=0},2000);
+			setInterval(function(){clicking=0},2500);
 		}
 	});
 
@@ -74,17 +72,7 @@ $(window).load(function() {
 		if(!$("#username").prop("disabled")){
 			$.ajax({
 				url: '/socket/username/'+$("#username").val(),
-			})
-			.done(function() {
-				console.log("success");
-			})
-			.fail(function() {
-				console.log("AJAX error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-			
+			}).done(function(){}).fail(function(){}).always(function(){})
 		}
 
 		if($("#username").val() && $("#message").val()){
@@ -114,6 +102,8 @@ $(window).load(function() {
 	socket.on('doneTyping', function (data) {
 		Typers.del(data.username)
 	});
+
+	adjMsgHeight()
 });
 
 $(window).on("blur focus", function(e) {
@@ -131,3 +121,15 @@ $(window).on("blur focus", function(e) {
 
     $(this).data("prevType", e.type);
 })
+
+$(window).resize(function() {
+	adjMsgHeight()
+});
+
+
+function adjMsgHeight(){
+	var windowHeight = $(window).height();
+	$('#messages').css({
+		'height': windowHeight - 230
+	});
+}
