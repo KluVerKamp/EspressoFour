@@ -105,7 +105,7 @@ var count=0;
 
 app.get("/hello.txt",function(req,res,next){
 	count++;
-	next();
+	res.send("Hello from text")
 });
 
 app.get("/count",function(req,res){
@@ -116,7 +116,7 @@ app.get("/count",function(req,res){
 app.get("/range/:from-:to",function(req,res){
 	// var from=parseInt( req.params.from , 0)
 	// var to=parseInt( req.params.to , 10)
-	//res.json(users.slice(from,to+1))
+	// res.json(users.slice(from,to+1))
 	res.json(users.slice(req.from,req.to+1))
 });
 
@@ -189,7 +189,33 @@ function getAllMethods(object) {
 
 // catch all the 404 uris
 app.use(function(req,res){
-	res.send(404,"Fuurr oh furrr");
+	var err = new Error('Fuurr oh furrr');
+	err.status = 404;
+    next();
+});
+
+/// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 // http.createServer(app).listen(app.get('port'), function(){
