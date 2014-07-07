@@ -19,7 +19,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set ('view engine', 'hjs'  )
 app.enable ('view cache')
 app.engine ('hjs', require('hogan-express') )
-
 app.set('layout', 'layout/default');
 app.set('partials', {header: ""});
 
@@ -239,12 +238,12 @@ var server = https.createServer(config,app);
 server.listen(app.get('port'))
 
 //redirect plain http connections to https
-http.createServer(function(req,res){
-	res.writeHead(302, {
-		'Location': "https://" + req.headers.host + ":" + app.get('port') + req.url
-	});
-	res.end();
-}).listen(80);
+// http.createServer(function(req,res){
+// 	res.writeHead(302, {
+// 		'Location': "https://" + req.headers.host + ":" + app.get('port') + req.url
+// 	});
+// 	res.end();
+//}).listen(80);
 
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {

@@ -102,8 +102,6 @@ $(window).load(function() {
 	socket.on('doneTyping', function (data) {
 		Typers.del(data.username)
 	});
-
-	adjMsgHeight()
 });
 
 $(window).on("blur focus", function(e) {
@@ -123,13 +121,13 @@ $(window).on("blur focus", function(e) {
 })
 
 $(window).resize(function() {
-	adjMsgHeight()
+	$('#messages').css({
+		'height': $(window).height() - 230
+	});
 });
 
-
-function adjMsgHeight(){
-	var windowHeight = $(window).height();
+$(document).ready(function() {
 	$('#messages').css({
-		'height': windowHeight - 230
+		'height': $(document).height() - 230
 	});
-}
+});
