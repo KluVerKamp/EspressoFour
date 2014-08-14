@@ -8,7 +8,7 @@ exports.index = function(req, res){
 };
 
 exports.default = function(req, res){
-	var authors = [{name :"Arbouch"},{name :"Amen"},{name :"Arabeque"},{name :"Arbi"},{name :"amen"}];
+	var authors = [{name :"Arbouch"},{name :"Amen"},{name :"Arabeque"},{name :"Amenoo"},{name :"Men"}];
 	messages = req.flash('info');
 	errors = req.flash('errors');
 

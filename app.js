@@ -1,9 +1,9 @@
-
 /**
  * Module dependencies.
  */
 var flash       = require('connect-flash');
 var passport   = require('passport');
+var bodyParser = require('body-parser');
 var express   = require('express');
 var db       = require("./models");
 var https   = require("https");
@@ -25,11 +25,22 @@ app.set('partials', {header: ""});
 app.use(require("serve-favicon")("public/favicon.ico"));
 app.use(require("method-override")());
 app.use(require("morgan")('dev')); //logger
-app.use(require("body-parser")());
-//app.use(express.urlencoded());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(require("connect-json")());
 app.use(require("cookie-parser")());
-app.use(require("express-session")({secret: 'mysecretword!'}));
+app.use(require("express-session")({
+                        "key": "",
+                        "secret": "keyboard cat",
+                        "cookie": {
+                            "path": "/",
+                            "httpOnly": true,
+                            "maxAge": null
+                        },
+                        "resave": true,
+                        "saveUninitialized": true,
+                        "proxy": null
+                    }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -59,9 +70,11 @@ app.param("to",function(req,res,next,to){
 
 
 app.get("/",require('./routes').default);
+app.get("/index",require('./routes/').index);
 
 // to use mongo, mongoose must be added to the package.json file
 // require('./routes/mongo')(app);
+
 
 require('./routes/login')(app,passport);
 require('./routes/sequelize')(app);
@@ -187,11 +200,25 @@ function getAllMethods(object) {
 }
 
 // catch all the 404 uris
-app.use(function(req,res){
-	var err = new Error('Fuurr oh furrr');
-	err.status = 404;
-    next();
+app.use(function(req, res, next) {
+    var err = new Error('Furr Ohh Furrr!!');
+    err.status = 404;
+    next(err);
 });
+
+/// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
 
 /// error handlers
 

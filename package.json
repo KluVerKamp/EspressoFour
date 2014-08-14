@@ -6,25 +6,24 @@
     "start": "SET DEBUG=socket.io* node EspressoFour &&  nodemon app.js"
   },
   "dependencies": {
+    "bcrypt-nodejs" : "latest",
+    "body-parser" : "~1.0.0",
+    "connect-flash" : "0.1.1",
+    "connect-json" : "latest",
+    "cookie-parser" : "latest",
     "express": "latest",
-    "less-middleware": "latest",
+    "express-session" : "latest",
+    "hogan-express" : "latest",
+    "less-middleware": "~0.1.x",
+    "lodash" : "latest",
+    "method-override" : "latest",
+    "morgan" : "latest",
     "mysql": "latest",
     "nodemon": "latest",
-    "sequelize": "latest",
-    "hogan-express" : "latest",
-    "connect-flash" : "latest",
     "passport" : "latest",
     "passport-local" : "latest",
-    "bcrypt-nodejs" : "latest",
-    "socket.io" : "latest",
-    "lodash" : "latest",
+    "sequelize": "latest",
     "serve-favicon":"latest",
-    "morgan" : "latest",
-    "body-parser" : "latest",
-    "cookie-parser" : "latest",
-    "method-override" : "latest",
-    "connect-json" : "latest",
-    "express-session" : "latest",
-    "less-middleware": "~0.1.x"
+    "socket.io" : "latest"
   }
 }
