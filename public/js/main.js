@@ -85,7 +85,7 @@ $(window).load(function() {
 			
 			$("#username").prop('disabled', true);
 
-			$("#messages").scrollTop($("#messages")[0].scrollHeight);
+			$("#messages").scrollTop($("#messages")[0].scrollHeight+40);
 		}
 	});
 
@@ -100,7 +100,9 @@ $(window).load(function() {
 		}
 
 		if(!focus) audio.play()
+		$("#messages").scrollTop($("#messages")[0].scrollHeight+40);
 		Typers.del(data.username)
+
 	});
 
 	socket.on('isTyping', function (data) {
