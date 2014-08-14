@@ -90,7 +90,15 @@ $(window).load(function() {
 	});
 
 	socket.on('good', function (data) {
-		$("#messages").append("<b>" + data.username + "</b>: " + data.message + "<br />");
+		if($("#username").val() == data.username){
+
+		$("#messages").append('<b class="text-muted">' + data.username + '</b>: ' + data.message + '<br />');
+		}
+		
+		else{
+			$("#messages").append('<b class="text-primary">' + data.username + '</b>: ' + data.message + '<br />');
+		}
+
 		if(!focus) audio.play()
 		Typers.del(data.username)
 	});
