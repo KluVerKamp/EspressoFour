@@ -1,6 +1,6 @@
 module.exports = function(app){
 	app.get("/socket",function(req,res){
-  		res.render("chat/chat",{myIP:req.host,username:req.cookies.username});
+  		res.render("chat/chat",{myIP:req.hostname,username:req.cookies.username});
 	})
 
 	app.get("/socket/username/:username",function(req,res){
