@@ -1,17 +1,19 @@
 <style type="text/css">
 	#messages{
 		border: 1px solid #eee;
-		margin: 0 0 15px 0;
 		overflow: auto;
 		padding: 20px;
 		background: white;
+	}
+	#whoistyping{
+		height:20px;
 	}
 </style>
 <script type="text/javascript">
 	myIP="{{myIP}}";
 </script>
-<div id="whoistyping" class="text-muted"></div>
 <div id="messages"></div>
+<div id="whoistyping" class="text-muted"></div>
 <div class="row">
 	<div class="col-md-2">
 	<input class="form-control" type="text" id="username" placeholder="Username" {{#username}} value="{{username}}" disabled {{/username}} {{^username}}autofocus{{/username}}/>

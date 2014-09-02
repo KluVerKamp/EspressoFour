@@ -1,62 +1,50 @@
 /**
  * Module dependencies.
  */
-var flash       = require('connect-flash');
-var passport   = require('passport');
-var bodyParser = require('body-parser');
-var express   = require('express');
-var db       = require("./models");
-var https   = require("https");
-var http   = require('http');
-var path  = require('path');
-var fs   = require("fs");
-var app = express();
+
+var methodeOverride      =  require("method-override");
+var expressSession      =  require("express-session");
+var lessMiddelwear     =  require('less-middleware');
+var favicon           =  require("serve-favicon");
+var cookieParser     =  require("cookie-parser");
+var connectJSON     =  require("connect-json");
+var flash          =  require('connect-flash');
+var bodyParser    =  require('body-parser');
+//var multiparty    =  require('multiparty');
+var passport     =  require('passport');
+var express     =  require('express');
+var db         =  require("./models");
+var https     =  require("https");
+var logger   =  require("morgan");
+var http    =  require('http');
+//var csurf  =  require("csurf");
+var path  =  require('path');
+var fs   =  require("fs");
+var app =  express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 
-app.set ('view engine', 'hjs'  )
+app.set ('view engine','hjs')
 app.enable ('view cache')
 app.engine ('hjs', require('hogan-express') )
 app.set('layout', 'layout/default');
 app.set('partials', {header: ""});
 
-app.use(require("serve-favicon")("public/favicon.ico"));
-app.use(require("method-override")());
-app.use(require("morgan")('dev')); //logger
+app.use(favicon("public/favicon.ico"));
+app.use(methodeOverride());
+app.use(logger('dev')); //logger
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(require("connect-json")());
-app.use(require("cookie-parser")());
-app.use(require("express-session")({
-                        "key": "",
-                        "secret": "keyboard cat",
-                        "cookie": {
-                            "path": "/",
-                            "httpOnly": true,
-                            "maxAge": null
-                        },
-                        "resave": true,
-                        "saveUninitialized": true,
-                        "proxy": null
-                    }));
+app.use(connectJSON());
+app.use(cookieParser());
+app.use(expressSession({"key": "","secret": "keyboard cat","cookie": {"path": "/","httpOnly": true,"maxAge": null},"resave": true,"saveUninitialized": true,"proxy": null}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
+app.use(lessMiddelwear({ src: path.join(__dirname, 'public') }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// catch htpp errors into pages
-app.use(function(err,req,res,next){
-	res.status(err.status||404);
-	res.send(err.message);	
-});
-
-app.use(function(err,req,res,next){
-	res.status(err.status||500);
-	res.send(err.message);
-});
 
 app.param("from",function(req,res,next,from){
 	req.from=parseInt(from,0)
@@ -195,30 +183,15 @@ app.get("/stream",function(req,res){
 });
 
 
-function getAllMethods(object) {
-	return Object.getOwnPropertyNames(object);
-}
 
-// catch all the 404 uris
+
+
+/// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Furr Ohh Furrr!!');
+    var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
-/// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
 
 /// error handlers
 
