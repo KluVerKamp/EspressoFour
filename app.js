@@ -235,7 +235,7 @@ if(passphrase) {
 }
 
 var server = https.createServer(config,app);
-server.listen(app.get('port'))
+server.listen(app.get('port'),"0.0.0.0")
 
 //redirect plain http connections to https
 // http.createServer(function(req,res){

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "SET DEBUG=socket.io* node EspressoFour &&  nodemon app.js"
+    "start": "DEBUG=socket.io* node app.js"
   },
   "dependencies": {
     "bcrypt-nodejs" : "latest",
