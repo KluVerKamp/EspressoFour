@@ -32,7 +32,7 @@ app.engine ('hjs', require('hogan-express') )
 app.set('layout', 'layout/default');
 app.set('partials', {header: ""});
 
-app.use(favicon("public/favicon.ico"));
+app.use(favicon(path.join(__dirname, 'public')+"/favicon.ico"));
 app.use(methodeOverride());
 app.use(logger('dev')); //logger
 app.use(bodyParser.json());
@@ -222,8 +222,8 @@ app.use(function(err, req, res, next) {
 // });
 
 
-var key_file   = "certs/file.pem";
-var cert_file  = "certs/file.crt";
+var key_file   = path.join(__dirname, 'certs')+"/file.pem";
+var cert_file  = path.join(__dirname, 'certs')+"/file.crt";
 var passphrase = "";
 var config	   = {
 	key: fs.readFileSync(key_file),
